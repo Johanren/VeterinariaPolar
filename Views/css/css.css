@@ -1,0 +1,44 @@
+.toast{
+    position:absolute;
+    bottom:10px;
+    left: 90px;
+    width:250px;
+    border-radius: 4px;
+    box-shadow: #310808 1px 1px 5px;
+    background-color: rgba(110, 159, 105, 0.78);
+    padding:10px;
+    color: #000000;
+    
+    opacity:1;
+    animation: toast 6000ms cubic-bezier(.23,.82,.16,1.46);
+    animation-iteration-count: 1;
+  }
+  
+  
+  @keyframes toast{
+    2%{
+      opacity:0;
+      transform: translateY(200px);
+    }
+  
+    100%{
+      opacity:1;
+      transform: translateY(0px);
+    }
+  }
+
+/* simple css-based tooltip */
+.tooltip {
+    background-color: #000;
+    border: 1px solid #fff;
+    padding: 10px 15px;
+    width: 200px;
+    display: none;
+    color: #fff;
+    text-align: left;
+    font-size: 12px;
+
+    /* outline radius for mozilla/firefox only */
+    -moz-box-shadow: 0 0 10px #000;
+    -webkit-box-shadow: 0 0 10px #000;
+}
