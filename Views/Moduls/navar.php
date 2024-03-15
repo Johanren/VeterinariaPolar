@@ -25,7 +25,7 @@ if (isset($_SESSION['roles'])) {
 ?>
 <header class="header" id="header">
     <div class="header_toggle"><i class='bx bx-menu' id="header-toggle"></i></div>
-    <div style="text-align: center; font-family: cursive; text-decoration: underline;"><h4>Veterinaria Polar</h4></div>
+    <div style="text-align: center; font-family: cursive; text-decoration: underline;"><h4>Polar Veterinaria - Pet shop</h4></div>
     <div class="header_img"><img src="Views/img/icon.jpg" alt=""></div>
 </header>
 <div class="l-navbar" id="nav-bar" style="background-color: #2981cf;">
