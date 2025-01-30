@@ -5,24 +5,15 @@ require_once 'conexion.php';
 class ModeloMedicamento
 {
     public $tabla = 'medicamentos';
-    function listarMedicamentoModelo($dato, $LIM)
+    function listarMedicamentoModelo()
     {
-        if ($dato != null) {
-            $sql = "SELECT * FROM $this->tabla WHERE Medicamento like ?";
-        } else {
-            $sql = "SELECT * FROM $this->tabla LIMIT ?,?";
-        }
+
+        $sql = "SELECT * FROM $this->tabla";
+
         try {
             $conn = new Conexion();
             $stms = $conn->conectar()->prepare($sql);
-            if ($dato != null) {
-                $dato .= '%';
-                $stms->bindParam(1, $dato, PDO::PARAM_STR);
-            } else {
-                $stms = $conn->conectar()->prepare($sql);
-                $stms->bindParam(1, $LIM['pagina'], PDO::PARAM_INT);
-                $stms->bindParam(2, $LIM['limit'], PDO::PARAM_INT);
-            }
+
             if ($stms->execute()) {
                 return $stms->fetchAll();
             } else {
@@ -33,7 +24,8 @@ class ModeloMedicamento
         }
     }
 
-    function contarDatoaMedicamaneotModelo(){
+    function contarDatoaMedicamaneotModelo()
+    {
         $sql = "SELECT COUNT(Medicamento) FROM $this->tabla";
         try {
             $conn = new Conexion();
@@ -46,7 +38,6 @@ class ModeloMedicamento
         } catch (PDOException $e) {
             print_r($e->getMessage());
         }
-
     }
 
     function registrarMedicamentoModelo($dato)
@@ -173,7 +164,8 @@ class ModeloMedicamento
         }
     }
 
-    function listarMedicamentoReporteModelo($insumo){
+    function listarMedicamentoReporteModelo($insumo)
+    {
         $sql = "SELECT * FROM $this->tabla WHERE Medicamento = ? ORDER BY Medicamento DESC";
         try {
             $conn = new Conexion();

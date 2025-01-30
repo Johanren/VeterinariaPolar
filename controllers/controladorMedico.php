@@ -9,35 +9,10 @@ class ControladorMedico
         return $respuesta;
     }
 
-    function listarModeloControlador($pagina,$articulo)
+    function listarModeloControlador()
     {
         $lis = new ModeloMedico();
-        if (isset($_POST['medico'])) {
-
-            if ($_POST['medico'] != null) {
-                $dato = $_POST['medico'];
-                $res = $lis->listarMedicoModelo($dato, '');
-                return $res;
-            } else {
-                $dato = $_POST['medico'];
-                $res = $lis->listarMedicoModelo($dato, '');
-                return $res;
-            }
-        } else {
-            $inial = ($pagina-1)*$articulo;
-            $lim = array(
-                'insumo' => null,
-                'pagina' => $inial,
-                'limit' => 3
-            );
-            $res = $lis->listarMedicoModelo('', $lim);
-            return $res;
-        }
-    }
-
-    function contarDatoaMedicoControlador(){
-        $con = new ModeloMedico();
-        $res = $con->contarDatoaMedicoModelo();
+        $res = $lis->listarMedicoModelo();
         return $res;
     }
 
@@ -80,7 +55,7 @@ class ControladorMedico
                 if ($res == true) {
                     echo '<script>window.location="index.php?action=okRegistrarMedico&pagina=1"</script>';
                 }
-            }else{
+            } else {
                 echo '<script>window.location="falloContrasenaMedico"</script>';
             }
         }

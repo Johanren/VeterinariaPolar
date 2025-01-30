@@ -22,43 +22,27 @@ if ($_SESSION['roles'] != "administrador") {
     echo '<script>window.location="inicio"</script>';
 }
 
-$conn = new ControladorMedicamento();
-$con = $conn->contarDatoaMedicamentoControlador();
-$limtPagina = 3;
-$pagina = $con[0]['COUNT(Medicamento)'] / $limtPagina;
-$pagina = ceil($pagina);
-if (!$_GET['pagina']) {
-    echo '<script>window.location="index.php?action=frmMedicamento&pagina=1"</script>';
-}
-if ($_GET['pagina'] > $pagina || $_GET['pagina'] <= 0) {
-    echo '<script>window.location="index.php?action=frmMedicamento&pagina=1"</script>';
-}
-
 $lis = new ControladorMedicamento();
-$res = $lis->lsitarMedicamentoControlador($_GET['pagina'],$limtPagina);
+$res = $lis->lsitarMedicamentoControlador();
 ?>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap4.js"></script>
 <h1 style="text-align: center;">Medicamentos</h1>
 <br><br><br>
 <div class="container">
     <div class="row">
         <div class="col">
             <a href="agregarMedicamento" class="btn btn-primary">Agregar Medicamento</a>
-            <br><br>
-            <div class="form-control">
-                <form method="post">
-                    <label for="">Medicamento</label>
-                    <input type="text" name="medicamento" class="form-control" placeholder="Nombre del medicamento">
-                    <br>
-                    <button class="btn btn-primary" name="buscar">Buscar</button>
-                </form>
-            </div>
         </div>
     </div>
     <br><br>
     <div class="row">
         <di class="col">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="usuario">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -85,24 +69,6 @@ $res = $lis->lsitarMedicamentoControlador($_GET['pagina'],$limtPagina);
                         ?>
                     </tbody>
                 </table>
-                <?php if (!isset($_POST['medicamento'])) { ?>
-                    <div class="row">
-                        <div class="col-sm-4"></div>
-                        <div class="col">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item <?php echo $_GET['pagina'] <= 1 ? 'disabled' : '' ?>"><a class="page-link" href="index.php?action=frmMedicamento&pagina=<?php echo $_GET['pagina'] - 1 ?>">Anterior</a></li>
-                                    <?php for ($i = 0; $i < $pagina; $i++) : ?>
-                                        <li class="page-item <?php if ($_GET['pagina'] == $i + 1) {
-                                                                    print 'active';
-                                                                } ?>"><a class="page-link" href="index.php?action=frmMedicamento&pagina=<?php echo $i + 1 ?>"><?php echo $i + 1 ?></a></li>
-                                    <?php endfor ?>
-                                    <li class="page-item <?php echo $_GET['pagina'] >= $pagina ? 'disabled' : '' ?>"><a class="page-link" href="index.php?action=frmMedicamento&pagina=<?php echo $_GET['pagina'] + 1 ?>">Siguiente</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                <?php } ?>
             </div>
         </di>
     </div>

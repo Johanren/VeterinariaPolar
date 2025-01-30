@@ -1,39 +1,17 @@
 <?php
 
-class ControladorInsumo{
-    function listarInsumoControlador($pagina,$articulo){
+class ControladorInsumo
+{
+    function listarInsumoControlador()
+    {
         $lis = new ModeloInsumo();
-        if (isset($_POST['insumo'])) {
-
-            if ($_POST['insumo'] != null) {
-                $dato = $_POST['insumo'];
-                $res = $lis->listarInsumoModelo($dato, '');
-                return $res;
-            } else {
-                $dato = $_POST['insumo'];
-                $res = $lis->listarInsumoModelo($dato, '');
-                return $res;
-            }
-        } else {
-            $inial = ($pagina-1)*$articulo;
-            $lim = array(
-                'insumo' => null,
-                'pagina' => $inial,
-                'limit' => 3
-            );
-            $res = $lis->listarInsumoModelo('', $lim);
-            return $res;
-        }
-        
-    }
-
-    function contarDatoaInsumoControlador(){
-        $con = new ModeloInsumo();
-        $res = $con->contarDatoaInsumoModelo();
+        $res = $lis->listarInsumoModelo();
         return $res;
     }
 
-    function registrarInsumoControlador(){
+
+    function registrarInsumoControlador()
+    {
         if (isset($_POST['agregarInsumo'])) {
             $dato = array(
                 'insumo' => $_POST['insumo'],
@@ -43,13 +21,14 @@ class ControladorInsumo{
             $res = $resgistrar->registraInsumoModelo($dato);
             if ($res == true) {
                 echo '<script>window.location="index.php?action=okAgregarInsumo&pagina=1"</script>';
-            }else{
+            } else {
                 echo '<script>window.location="index.php?action=falloAgregarInsumo&pagina=1"</script>';
             }
         }
     }
 
-    function consultarInsumoControaldor(){
+    function consultarInsumoControaldor()
+    {
         if (isset($_GET['idInsumos'])) {
             $dato = $_GET['idInsumos'];
             $lis = new ModeloInsumo();
@@ -57,8 +36,9 @@ class ControladorInsumo{
             return $res;
         }
     }
-    
-    function actualizarInsumoControlador(){
+
+    function actualizarInsumoControlador()
+    {
         if (isset($_POST['actualizarInsumo'])) {
             $dato = array(
                 'id' => $_POST['idInsumo'],
@@ -70,8 +50,8 @@ class ControladorInsumo{
             $res = $actualizar->actualziarInsumoModelo($dato);
             if ($res == true) {
                 echo '<script>window.location="index.php?action=okActualizaInsumo&pagina=1"</script>';
-            }else{
-                echo '<script>window.location="index.php?action=falloActualizaInsumo&idInsumos='.$_POST['idInsumo'].'"</script>';
+            } else {
+                echo '<script>window.location="index.php?action=falloActualizaInsumo&idInsumos=' . $_POST['idInsumo'] . '"</script>';
             }
         }
     }
@@ -83,24 +63,28 @@ class ControladorInsumo{
         return $respuesta;
     }
 
-    function obtenerTotalInsumo($dato){
+    function obtenerTotalInsumo($dato)
+    {
         $consultar = new ModeloInsumo();
         $respuesta = $consultar->obtenerTotalInsumoModelo($dato);
         return $respuesta;
     }
 
-    function actualizarInsumoTotal($total, $insumo){
+    function actualizarInsumoTotal($total, $insumo)
+    {
         $consultar = new ModeloInsumo();
         $respuesta = $consultar->actualizarInsumoTotalModelo($total, $insumo);
     }
 
-    function listarInsumosReporteControaldor($insumo){
+    function listarInsumosReporteControaldor($insumo)
+    {
         $list =  new ModeloInsumo();
         $res = $list->listarInsumoReporteModelo($insumo);
         return $res;
     }
 
-    function contarInsumosReporteControlador(){
+    function contarInsumosReporteControlador()
+    {
         $list =  new ModeloInsumo();
         $res = $list->contarInsumosReportModelo();
         return $res;

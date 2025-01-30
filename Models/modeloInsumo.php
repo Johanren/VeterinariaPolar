@@ -4,24 +4,13 @@ require_once 'conexion.php';
 class ModeloInsumo
 {
     public $tabla = 'insumos';
-    function listarInsumoModelo($dato, $LIM)
+    function listarInsumoModelo()
     {
-        if ($dato != null) {
-            $sql = "SELECT * FROM $this->tabla WHERE Insumo like ?";
-        } else {
-            $sql = "SELECT * FROM $this->tabla LIMIT ?,?";
-        }
+        $sql = "SELECT * FROM $this->tabla";
+
         try {
             $conn = new Conexion();
             $stms = $conn->conectar()->prepare($sql);
-            if ($dato != null) {
-                $dato .= '%';
-                $stms->bindParam(1, $dato, PDO::PARAM_STR);
-            } else {
-                $stms = $conn->conectar()->prepare($sql);
-                $stms->bindParam(1, $LIM['pagina'], PDO::PARAM_INT);
-                $stms->bindParam(2, $LIM['limit'], PDO::PARAM_INT);
-            }
             if ($stms->execute()) {
                 return $stms->fetchAll();
             } else {
@@ -170,7 +159,8 @@ class ModeloInsumo
         }
     }
 
-    function listarInsumoReporteModelo($insumo){
+    function listarInsumoReporteModelo($insumo)
+    {
         $sql = "SELECT * FROM $this->tabla WHERE Insumo = ? ORDER BY Insumo DESC";
         try {
             $conn = new Conexion();
@@ -186,7 +176,8 @@ class ModeloInsumo
         }
     }
 
-    function contarInsumosReportModelo(){
+    function contarInsumosReportModelo()
+    {
         $sql = "SELECT COUNT(Insumo) AS CONT FROM $this->tabla";
         try {
             $conn = new Conexion();

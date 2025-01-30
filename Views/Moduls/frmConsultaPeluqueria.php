@@ -2,6 +2,11 @@
 $consultar = new ControladorHora();
 $con = $consultar->consultarHoraMascota();
 ?>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.2.1/js/dataTables.bootstrap4.js"></script>
 <h1 style="text-align: center;">Consulta Peluqueria</h1>
 <br><br>
 <form action="" method="post">
@@ -31,7 +36,7 @@ if (isset($con)) {
     <div class="container">
         <div class="row">
             <div class="col">
-                <table class="table">
+                <table class="table" id="usuario">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

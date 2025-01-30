@@ -1,3 +1,6 @@
+$(document).ready(function () {
+    $('#usuario').DataTable();
+});
 function previewImage1(nb) {
     var reader = new FileReader();
     reader.readAsDataURL(document.getElementById('uploadImage' + nb).files[0]);

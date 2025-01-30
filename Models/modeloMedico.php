@@ -29,7 +29,8 @@ class ModeloMedico
         }
     }
 
-    function contarDatoaMedicoModelo(){
+    function contarDatoaMedicoModelo()
+    {
         $sql = "SELECT COUNT(medico) FROM $this->tabla";
         try {
             $conn = new Conexion();
@@ -42,27 +43,15 @@ class ModeloMedico
         } catch (PDOException $e) {
             print_r($e->getMessage());
         }
-
     }
 
-    function listarMedicoModelo($dato, $LIM)
+    function listarMedicoModelo()
     {
-        if ($dato != null) {
-            $sql = "SELECT * FROM $this->tabla INNER JOIN roles ON medico.idRol = roles.idRol WHERE medico.medico like ?";
-        } else {
-            $sql = "SELECT * FROM $this->tabla INNER JOIN roles ON medico.idRol = roles.idRol LIMIT ?,?";
-        }
+
+        $sql = "SELECT * FROM $this->tabla INNER JOIN roles ON medico.idRol = roles.idRol";
         try {
             $conn = new Conexion();
             $stms = $conn->conectar()->prepare($sql);
-            if ($dato != null) {
-                $dato .= '%';
-                $stms->bindParam(1, $dato, PDO::PARAM_STR);
-            } else {
-                $stms = $conn->conectar()->prepare($sql);
-                $stms->bindParam(1, $LIM['pagina'], PDO::PARAM_INT);
-                $stms->bindParam(2, $LIM['limit'], PDO::PARAM_INT);
-            }
             if ($stms->execute()) {
                 return $stms->fetchAll();
             } else {

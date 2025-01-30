@@ -1,36 +1,13 @@
 <?php
 class ControladorMedicamento
 {
-    function lsitarMedicamentoControlador($pagina,$articulo)
+    function lsitarMedicamentoControlador()
     {
         $lis = new ModeloMedicamento();
-        if (isset($_POST['medicamento'])) {
-
-            if ($_POST['medicamento'] != null) {
-                $dato = $_POST['medicamento'];
-                $res = $lis->listarMedicamentoModelo($dato, '');
-                return $res;
-            } else {
-                $dato = $_POST['medicamento'];
-                $res = $lis->listarMedicamentoModelo($dato, '');
-                return $res;
-            }
-        } else {
-            $inial = ($pagina-1)*$articulo;
-            $lim = array(
-                'insumo' => null,
-                'pagina' => $inial,
-                'limit' => 3
-            );
-            $res = $lis->listarMedicamentoModelo('', $lim);
+        
+            $res = $lis->listarMedicamentoModelo();
             return $res;
-        }
-    }
-
-    function contarDatoaMedicamentoControlador(){
-        $con = new ModeloMedicamento();
-        $res = $con->contarDatoaMedicamaneotModelo();
-        return $res;
+        
     }
 
     function agregarMedicamentoControlador($cantidad)
